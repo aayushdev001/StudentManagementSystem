@@ -14,7 +14,7 @@ import com.aayush.DAO.StudentDAO;
 import com.aayush.Model.Student;
 
 
-@WebServlet("/")
+@WebServlet("/v1/*")
 public class StudentServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
@@ -27,8 +27,13 @@ public class StudentServlet extends HttpServlet
        
     
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
-	{
-		String action  = req.getServletPath();
+	{		
+		String action  = req.getPathInfo(); // Use getPathInfo to handle paths after /v1
+		
+		if (action == null) 
+		{
+			action = "/"; // Default action
+		}
 		
 		switch (action)
 		{
@@ -54,8 +59,7 @@ public class StudentServlet extends HttpServlet
 				
 			default:
 				listStudents(req, res);
-				break;
-				
+				break;				
 		}
 	}
 

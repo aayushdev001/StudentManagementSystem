@@ -79,10 +79,14 @@ public class StudentDAO
 				return 0;
 			}
 			
-		} catch (ClassNotFoundException e) {
+		} 
+		catch (ClassNotFoundException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -137,10 +141,12 @@ public class StudentDAO
 				student.setId(resultSet.getInt("id"));
 				students.add(student);
 			}
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (SQLException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -155,10 +161,12 @@ public class StudentDAO
 			PreparedStatement preparedStatement = connection.prepareStatement(DELETE_STUDENTS_BY_ID);
 			preparedStatement.setInt(1, id);
 			rowDeleted = preparedStatement.executeUpdate() > 0;			
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (SQLException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -176,10 +184,13 @@ public class StudentDAO
 			preparedStatement.setString(3, student.getBranch());
 			preparedStatement.setInt(4, student.getId());
 			rowUpdated = preparedStatement.executeUpdate() > 0;
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ClassNotFoundException e1) {
+		} catch (ClassNotFoundException e1) 
+		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
