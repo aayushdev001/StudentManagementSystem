@@ -36,7 +36,7 @@
                     <fieldset class="form-group">
                         <label>Email</label> 
                         <input type="email" class="form-control"
-                            name="email" required="required">
+                            name="email" required="required" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$">
                     </fieldset>
 
                     <fieldset class="form-group">

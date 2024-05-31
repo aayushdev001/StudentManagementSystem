@@ -1,11 +1,13 @@
 package com.aayush.Web;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,39 +31,48 @@ public class StudentServlet extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException 
 	{		
 		String action  = req.getServletPath(); // Use getPathInfo to handle paths after /v1
-		System.out.println(action);
+//		System.out.println(action);
+//		System.out.print(Arrays.toString(req.getCookies()));
 		
-		if (action == null) 
+		if(isUserLoggedIn(req.getCookies()))
 		{
-			action = "/"; // Default action
-		}
-		
-		switch (action)
-		{
-			case "/new":
-				showNewForm(req, res);
-				break;
+			if (action == null) 
+			{
+				action = "/"; // Default action
+			}
 			
-			case "/insert":
-				insertNewStudent(req, res);
-				break;
+			switch (action)
+			{
+				case "/new":
+					showNewForm(req, res);
+					break;
 				
-			case "/delete":
-				deleteStudent(req, res);
-				break;
-				
-			case "/edit":
-				showEditForm(req, res);
-				break;
-				
-			case "/update":
-				updateStudent(req, res);
-				break;
-				
-			default:
-				listStudents(req, res);
-				break;				
+				case "/insert":
+					insertNewStudent(req, res);
+					break;
+					
+				case "/delete":
+					deleteStudent(req, res);
+					break;
+					
+				case "/edit":
+					showEditForm(req, res);
+					break;
+					
+				case "/update":
+					updateStudent(req, res);
+					break;
+					
+				default:
+					listStudents(req, res);
+					break;				
+			}
 		}
+		else
+		{
+			res.sendRedirect("Login.jsp");
+		}
+		
 	}
 
 	
@@ -126,6 +137,19 @@ public class StudentServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		doGet(request, response);
+	}
+	
+	private boolean isUserLoggedIn(Cookie[] ck)
+	{
+		System.out.println(ck.length);
+		if(ck == null || ck.length == 1) 
+		{
+	        return false;
+	    } 
+		else 
+		{
+	        return true;
+	    }
 	}
 
 }
