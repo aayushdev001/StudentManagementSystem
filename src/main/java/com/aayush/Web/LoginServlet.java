@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,13 @@ public class LoginServlet extends HttpServlet
 		{
 			if(checkLogin(email, password))
 			{
-				res.sendRedirect(req.getContextPath() + "/v1");
+				Cookie ck1 = new Cookie("email", email);
+				Cookie ck2 = new Cookie("password", password);
+				
+				res.addCookie(ck1);
+				res.addCookie(ck2);
+				
+				res.sendRedirect(req.getContextPath() + "/list");
 			}
 			else
 			{

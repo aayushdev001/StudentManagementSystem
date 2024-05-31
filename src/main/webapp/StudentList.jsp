@@ -22,6 +22,8 @@
 			<ul class="navbar-nav">
 				<li><a href="<%=request.getContextPath()%>/list"
 					class="nav-link">Students</a></li>
+				<li><a href="<%=request.getContextPath()%>/logout"
+                   class="nav-link">Logout</a></li> <!-- Added logout button -->
 			</ul>
 		</nav>
 	</header>
